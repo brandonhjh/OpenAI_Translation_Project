@@ -14,7 +14,7 @@
         <h2>Translated with the help of <i>brother chat</i></h2>
     </div>
 
-    <form class="content" id="translationForm"> <!-- action="/translate" method="POST" -->
+    <form class="content" id="translationForm">
         <textarea name="text-to-translate" id="textToTranslate" rows="6" cols="60" placeholder="Enter text here..."></textarea>
         <br>
         <button type="button" onclick="submitText()">Translate</button>
@@ -31,10 +31,6 @@
 
         function submitText() {
             const formData = textToTranslate.value;
-
-            // //debug
-            // console.log(textToTranslate.value);
-            // console.log(formData);
 
             fetch('http://127.0.0.1:5000/translate', {
                 method: 'POST',
