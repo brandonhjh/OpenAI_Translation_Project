@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandon's Translation Service</title>
+    <link rel="stylesheet" href="MyTranslator.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Brandon's <i>English&nbsp;to&nbsp;Chinese</i> Translation Service!</h1>
+        <h2>Translated with the help of <i>brother chat</i></h2>
+    </div>
+
+    <form class="content" id="translationForm"> <!-- action="/translate" method="POST" -->
+        <textarea name="text-to-translate" id="textToTranslate" rows="6" cols="60" placeholder="Enter text here..."></textarea>
+        <br>
+        <button type="button" onclick="submitText()">Translate</button>
+    </form>
+
+    <div class="outputBox" id="outputBox">
+        <!-- Chinese translation appear here -->
+    </div>
+
+    <script>
+        const textToTranslate = document.getElementById('textToTranslate');
+        const outputBox = document.getElementById('outputBox');
+
+
+        function submitText() {
+            const formData = textToTranslate.value;
+
+            // //debug
+            // console.log(textToTranslate.value);
+            // console.log(formData);
+
+            fetch('http://127.0.0.1:5000/translate', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                outputBox.textContent = data; // Update outputBox with translation response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
